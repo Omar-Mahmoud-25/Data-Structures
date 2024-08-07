@@ -1,7 +1,7 @@
 #ifndef STACK_STACK_HPP
 #define STACK_STACK_HPP
 #include <iostream>
-#include "..\SingleLinkedList\SingleLinkedList.cpp"
+#include "..\Single Linked List\SingleLinkedList.cpp"
 using namespace std;
 
 template <class T>
