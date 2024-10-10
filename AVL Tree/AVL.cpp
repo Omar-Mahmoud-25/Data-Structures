@@ -165,28 +165,16 @@ typename AVL<T>::template Node<T>* AVL<T>::insert(Node<T> *curr, T value)
 {
     if (curr == nullptr)
         return new Node<T>(value);
-    if (value < curr->data)
+    if (value < curr->data){
         curr->left = insert(curr->left, value);
-    else
+        curr->left->parent = curr;
+    }
+    else{
         curr->right = insert(curr->right, value);
+        curr->right->parent = curr;
+    }
     update(curr);
     return balance(curr);
-}
-
-template <class T>
-typename AVL<T>::template Node<T>* AVL<T>::getParent(Node<T> *curr)
-{
-    if (curr == root || root == nullptr)
-        return nullptr;
-    Node<T> *node = root;
-    while (node)
-        if (node->left == curr || node->right == curr)
-            return node;
-        else if (curr->data < node->data)
-            node = node->left;
-        else
-            node = node->right;
-    return nullptr;
 }
 
 template <class T>
@@ -204,16 +192,22 @@ void AVL<T>::update(Node<T> *node)
 template <class T>
 typename AVL<T>::template Node<T>* AVL<T>::leftRotate(Node<T> *curr)
 {
-    Node<T> *newRoot = curr->right, *parent = getParent(curr);
+    Node<T> *newRoot = curr->right, *parent = curr->parent;
     Node<T> *T2 = newRoot->left;
     if (parent == nullptr)
-        root = newRoot;
+        root = newRoot,
+        newRoot->parent = nullptr;
     else if (parent->right == curr)
-        parent->right = newRoot;
+        parent->right = newRoot,
+        newRoot->parent = parent;
     else
-        parent->left = newRoot;
+        parent->left = newRoot,
+        newRoot->parent = parent;
     newRoot->left = curr;
+    curr->parent = newRoot;
     curr->right = T2;
+    if (T2)
+        T2->parent = curr;
     update(curr);
     update(newRoot);
     return newRoot;
@@ -223,15 +217,21 @@ template <class T>
 typename AVL<T>::template Node<T>* AVL<T>::rightRotate(Node<T> *curr)
 {
     Node<T> *newRoot = curr->left;
-    Node<T> *T2 = newRoot->right, *parent = getParent(curr);
+    Node<T> *T2 = newRoot->right, *parent = curr->parent;
     if (parent == nullptr)
-        root = newRoot;
+        root = newRoot,
+        newRoot->parent = nullptr;
     else if (parent->right == curr)
-        parent->right = newRoot;
+        parent->right = newRoot,
+        newRoot->parent = parent;
     else
-        parent->left = newRoot;
+        parent->left = newRoot,
+        newRoot->parent = parent;
     newRoot->right = curr;
+    curr->parent = newRoot;
     curr->left = T2;
+    if (T2) 
+        T2->parent = curr;
     update(curr);
     update(newRoot);
     return newRoot;
@@ -276,7 +276,7 @@ void AVL<T>::removeWithTwoChildren(Node<T> *node)
 template <class T>
 void AVL<T>::remove(Node<T> *node)
 {
-    Node<T> *parent = getParent(node);
+    Node<T> *parent = node->parent;
     --numberOfNodes;
     if (parent && parent->right == node)
     {

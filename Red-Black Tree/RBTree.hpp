@@ -1,40 +1,33 @@
-#ifndef AVL_HPP
-#define AVL_HPP
+#ifndef RBTREE_HPP
+#define RBTREE_HPP
 #include <bits/stdc++.h>
 using namespace std;
 
 template <class T>
-class AVL
-{
+class RBTree{
     template <class X>
-    class Node
-    {
+    class Node{
     public:
         T data;
-        int height, BF;
+        bool black;
         Node *left, *right, *parent;
         Node(X data) :
             data(data),
-            height(0),
-            BF(0),
+            black(false),
             left(nullptr),
             right(nullptr),
             parent(nullptr) {}
+        
     };
     Node<T> *root;
     int numberOfNodes = 0;
 
-    Node<T>* getMin(Node<T>* node);
-    Node<T>* getMax(Node<T>* node);
     Node<T>* rightRotate(Node<T> *curr);
     Node<T>* leftRotate(Node<T> *curr);
-    Node<T>* insert(Node<T> *curr, T value);
-    // Node<T>* getParent(Node<T> *curr);
-    Node<T>* balance(Node<T> *node);
-    void update(Node<T> *node);
+    void handleTwoAdjacentRedNodes(Node<T> *curr);
     void remove(Node<T> *curr, T value);
-    void remove(Node<T> *curr);
-    void removeWithTwoChildren(Node<T> *curr);
+    void removeNode(Node<T> *curr);
+    void handleDoubleBlack(Node<T>* curr);
     int height(Node<T>* node) const;
     void inOrderTraversal(Node<T>* node) const;
     void inReversedOrderTraversal(Node<T>* node) const;
@@ -43,8 +36,8 @@ class AVL
     void visit(Node<T>* node) const;
 
 public:
-    AVL():root(nullptr){}
-    ~AVL();
+    RBTree():root(nullptr){}
+    ~RBTree();
     void insert(T val);
     void remove(T val);
     bool find(T val) const;
