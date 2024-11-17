@@ -312,7 +312,7 @@ void RBTree<T>::handleDoubleBlack(Node<T> *node){
             leftRotate(parent);
         brother->black = !brother->black;
         parent->black = !parent->black;
-        return;
+        return handleDoubleBlack(node);
     }
     if ((brother->left == nullptr || brother->left->black) && (brother->right == nullptr || brother->right->black)){
         brother->black = !brother->black;
