@@ -1,17 +1,17 @@
-#ifndef RBTREE_CPP
-#define RBTREE_CPP
-#include "RBTree.hpp"
+#ifndef REDBLACKTREE_CPP
+#define REDBLACKTREE_CPP
+#include "RedBlackTree.hpp"
 
 template <class T>
-RBTree<T>::~RBTree(){this->clear();}
+RedBlackTree<T>::~RedBlackTree(){this->clear();}
 
 template <class T>
-int RBTree<T>::size() const{
+int RedBlackTree<T>::size() const{
     return numberOfNodes;
 }
 
 template <class T>
-void RBTree<T>::clear(){
+void RedBlackTree<T>::clear(){
     if (root == nullptr)
         return;
     queue <Node<T>*> qu;
@@ -31,19 +31,19 @@ void RBTree<T>::clear(){
 }
 
 template <class T>
-int RBTree<T>::height(Node<T>* node) const{
+int RedBlackTree<T>::height(Node<T>* node) const{
     if (node == nullptr)
         return 0;
     return 1 + max(height(node->right),height(node->left));
 }
 
 template <class T>
-int RBTree<T>::height() const{
+int RedBlackTree<T>::height() const{
     return height(root);
 }
 
 template <class T>
-bool RBTree<T>::find(T val) const{
+bool RedBlackTree<T>::find(T val) const{
     Node<T> *node = root;
     while(node)
         if (node->data == val)
@@ -56,14 +56,14 @@ bool RBTree<T>::find(T val) const{
 }
 
 template <class T>
-void RBTree<T>::visit(Node <T>* node) const{
+void RedBlackTree<T>::visit(Node <T>* node) const{
     cout << node->data << ' ' << 
     (node->black? "black":"red") << '\n';
     return;
 }
 
 template <class T>
-void RBTree<T>::inOrderTraversal(Node <T>* node) const{
+void RedBlackTree<T>::inOrderTraversal(Node <T>* node) const{
     if (node == nullptr)
         return;
     inOrderTraversal(node->left);
@@ -72,7 +72,7 @@ void RBTree<T>::inOrderTraversal(Node <T>* node) const{
 }
 
 template <class T>
-void RBTree<T>::inReversedOrderTraversal(Node <T>* node) const{
+void RedBlackTree<T>::inReversedOrderTraversal(Node <T>* node) const{
     if (node == nullptr)
         return;
     inReversedOrderTraversal(node->right);
@@ -81,7 +81,7 @@ void RBTree<T>::inReversedOrderTraversal(Node <T>* node) const{
 }
 
 template <class T>
-void RBTree<T>::preOrderTraversal(Node <T>* node) const{
+void RedBlackTree<T>::preOrderTraversal(Node <T>* node) const{
     if (node == nullptr)
         return;
     visit(node);
@@ -90,7 +90,7 @@ void RBTree<T>::preOrderTraversal(Node <T>* node) const{
 }
 
 template <class T>
-void RBTree<T>::postOrderTraversal(Node <T>* node) const{
+void RedBlackTree<T>::postOrderTraversal(Node <T>* node) const{
     if (node == nullptr)
         return;
     postOrderTraversal(node->left);
@@ -99,27 +99,27 @@ void RBTree<T>::postOrderTraversal(Node <T>* node) const{
 }
 
 template <class T>
-void RBTree<T>::inOrderTraversal() const{
+void RedBlackTree<T>::inOrderTraversal() const{
     return inOrderTraversal(root);
 }
 
 template <class T>
-void RBTree<T>::inReversedOrderTraversal() const{
+void RedBlackTree<T>::inReversedOrderTraversal() const{
     return inReversedOrderTraversal(root);
 }
 
 template <class T>
-void RBTree<T>::preOrderTraversal() const{
+void RedBlackTree<T>::preOrderTraversal() const{
     return preOrderTraversal(root);
 }
 
 template <class T>
-void RBTree<T>::postOrderTraversal() const{
+void RedBlackTree<T>::postOrderTraversal() const{
     return postOrderTraversal(root);
 }
 
 template <class T>
-void RBTree<T>::breadthFirstTraversal() const{
+void RedBlackTree<T>::breadthFirstTraversal() const{
     if (root == nullptr)
         return;
     queue<Node<T>*>q;
@@ -137,7 +137,7 @@ void RBTree<T>::breadthFirstTraversal() const{
 
 
 template <class T>
-void RBTree<T>::insert(T val){
+void RedBlackTree<T>::insert(T val){
     ++numberOfNodes;
     Node<T> *newNode = new Node<T>(val);
     if (root == nullptr){
@@ -166,7 +166,7 @@ void RBTree<T>::insert(T val){
 }
 
 template <class T>
-void RBTree<T>::handleTwoAdjacentRedNodes(Node<T> *node){
+void RedBlackTree<T>::handleTwoAdjacentRedNodes(Node<T> *node){
     if (!node)
         return;
     if (node == root){
@@ -203,7 +203,7 @@ void RBTree<T>::handleTwoAdjacentRedNodes(Node<T> *node){
 }
 
 template <class T>
-typename RBTree<T>::template Node<T>* RBTree<T>::leftRotate(Node<T> *curr)
+typename RedBlackTree<T>::template Node<T>* RedBlackTree<T>::leftRotate(Node<T> *curr)
 {
     Node<T> *newRoot = curr->right, *parent = curr->parent;
     Node<T> *T2 = newRoot->left;
@@ -223,7 +223,7 @@ typename RBTree<T>::template Node<T>* RBTree<T>::leftRotate(Node<T> *curr)
 }
 
 template <class T>
-typename RBTree<T>::template Node<T>* RBTree<T>::rightRotate(Node<T> *curr)
+typename RedBlackTree<T>::template Node<T>* RedBlackTree<T>::rightRotate(Node<T> *curr)
 {
     Node<T> *newRoot = curr->left;
     Node<T> *T2 = newRoot->right, *parent = curr->parent;
@@ -243,14 +243,14 @@ typename RBTree<T>::template Node<T>* RBTree<T>::rightRotate(Node<T> *curr)
 }
 
 template <class T>
-void RBTree<T>::remove(T value){
+void RedBlackTree<T>::remove(T value){
     if (root == nullptr)
         return;
     return remove(root, value);
 }
 
 template <class T>
-void RBTree<T>::remove(Node<T> *curr, T value)
+void RedBlackTree<T>::remove(Node<T> *curr, T value)
 {
     if (curr == nullptr)
         return;
@@ -264,7 +264,7 @@ void RBTree<T>::remove(Node<T> *curr, T value)
 }
 
 template <class T>
-void RBTree<T>::removeNode(Node<T> *node){
+void RedBlackTree<T>::removeNode(Node<T> *node){
     --numberOfNodes;
     while(node->left || node->right){
         if (node->left){
@@ -296,7 +296,7 @@ void RBTree<T>::removeNode(Node<T> *node){
 }
 
 template <class T>
-void RBTree<T>::handleDoubleBlack(Node<T> *node){
+void RedBlackTree<T>::handleDoubleBlack(Node<T> *node){
     if (node && (!node->black || node == root)){
         node->black = true;
         return;

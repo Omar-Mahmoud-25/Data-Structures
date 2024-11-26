@@ -1,10 +1,10 @@
-#ifndef RBTREE_HPP
-#define RBTREE_HPP
+#ifndef REDBLACKTREE_HPP
+#define REDBLACKTREE_HPP
 #include <bits/stdc++.h>
 using namespace std;
 
 template <class T>
-class RBTree{
+class RedBlackTree{
     template <class X>
     class Node{
     public:
@@ -36,8 +36,8 @@ class RBTree{
     void visit(Node<T>* node) const;
 
 public:
-    RBTree():root(nullptr){}
-    ~RBTree();
+    RedBlackTree():root(nullptr){}
+    ~RedBlackTree();
     void insert(T val);
     void remove(T val);
     bool find(T val) const;
