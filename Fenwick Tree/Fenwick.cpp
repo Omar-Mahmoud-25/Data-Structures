@@ -23,10 +23,10 @@ ll FenwickTree::query(int x,int y){
 }
 
 void FenwickTree::update(int postion, int value){
-    ll diff = value - query(postion,postion++);
-    while (postion < tree.size()){
-        tree[postion] += diff;
-        postion += postion & -postion;
+    value = value - query(postion,postion);
+    while(postion < tree.size()){
+        this->tree[postion] += value;
+        postion += (postion & -postion);
     }
 }
 
