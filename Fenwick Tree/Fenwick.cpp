@@ -2,6 +2,10 @@
 #define ll long long
 using namespace std;
 
+FenwickTree::FenwickTree(int size){
+    tree.resize(size, 0);
+}
+
 FenwickTree::FenwickTree(vector<int>& v){
     tree.resize(v.size() + 1, 0);
     for (int i = 0; i < v.size(); i++)
