@@ -84,6 +84,7 @@ void BTree<T, N>::insert(Node* node, T data){
                 ++node->size;
                 if (node->size == N)
                     split(node);
+                
                 return;
             }
         }
@@ -102,9 +103,8 @@ void BTree<T, N>::split(Node* node){
     }
     int newPosition = 0;
     for (int i = 0; i<parent->size; ++i)
-        if (parent->data[i] < node->data[mid] && (i == parent->size-1 || parent->data[i+1] > node->data[mid])){
+        if (parent->data[i] < node->data[mid] && (i == parent->size-1 || parent->data[i+1] > node->data[mid]))
             newPosition = i+1;
-        }
     for (int i = node->size; i > newPosition; --i){
         parent->data[i] = parent->data[i-1];
         parent->children[i+1] = parent->children[i];

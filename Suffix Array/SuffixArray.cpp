@@ -13,6 +13,7 @@ SuffixArray::SuffixArray(const char *string){
 
 SuffixArray::~SuffixArray(){
     delete[] suffixArray;
+    delete[] string;
 }
 
 void SuffixArray::constructUsingPrefixDoubling(){

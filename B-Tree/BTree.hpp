@@ -1,5 +1,3 @@
-#include <iostream>
-using namespace std;
 template <typename T, size_t N>
 class BTree{
 private:
@@ -35,7 +33,6 @@ public:
     ~BTree();
     int numberOfNodes();
     void insert(T data);
-    // void remove(T data);
     void clear();
     void print();
 };

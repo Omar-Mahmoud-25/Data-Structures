@@ -7,7 +7,7 @@ template <class T>
 class SparseTable{
 private:
     vector<vector<T>> table;
-    function <T(T,T)> operation;
+    function <T(T,T)> combine;
     int length;
 public:
     SparseTable(const vector<T>& data,const function <T(T,T)>& operation);
