@@ -10,7 +10,7 @@ SingleLinkedList<T>::~SingleLinkedList(){
 
 template <class T>
 void SingleLinkedList<T>::push_back(T data){
-    Node<T>* newNode = new Node<T>(data);
+    Node* newNode = new Node(data);
     ++length;
     if (head == nullptr)
         return void(head = last = newNode);
@@ -23,8 +23,8 @@ template <class T>
 void SingleLinkedList<T>::push_front(T data){
     ++length;
     if (head == nullptr)
-        return void(head = last = new Node<T>(data));
-    Node<T>* newNode = new Node<T>(data,head);
+        return void(head = last = new Node(data));
+    Node* newNode = new Node(data,head);
     head = newNode;
     return;
 }
@@ -38,7 +38,7 @@ void SingleLinkedList<T>::insert_at(T data,int position){
     if (position == length)
         return push_back(data);
     ++length;
-    Node<T> *newNode = new Node<T>(data),*p = head;
+    Node *newNode = new Node(data),*p = head;
     while(--position)
         p = p->next;
     newNode->next = p->next;
@@ -50,7 +50,7 @@ template <class T>
 void SingleLinkedList<T>::pop_front(){
     if (head == nullptr)
         throw runtime_error("Empty List!!");
-    Node<T>* newNode = head -> next;
+    Node* newNode = head -> next;
     delete head;
     head = newNode;
     --length;
@@ -68,7 +68,7 @@ void SingleLinkedList<T>::pop_back(){
         return;
     }
 
-    Node<T>* last = head,*beforeLast = nullptr;
+    Node* last = head,*beforeLast = nullptr;
     while(last -> next != nullptr)
         beforeLast = last,last = last -> next;
     beforeLast -> next = nullptr;
@@ -86,7 +86,7 @@ void SingleLinkedList<T>::remove_at(int position){
     if (position == length-1)
         return pop_back();
     --length;
-    Node<T> *newNode,*p = head;
+    Node *newNode,*p = head;
     while(--position)
         p = p->next;
     newNode = p->next;
@@ -101,7 +101,7 @@ void SingleLinkedList<T>::reverse(){
         throw runtime_error("Cannot reverse an empty list!");
     if (length == 1)
         return;
-    Node<T> *previous = nullptr,*curr = head,*nxt = head;
+    Node *previous = nullptr,*curr = head,*nxt = head;
     last = head;
     while(curr)
         nxt = nxt->next,
@@ -117,7 +117,7 @@ void SingleLinkedList<T>::clear(){
     if (head == nullptr)
         return;
     length = 0;
-    Node <T>* current = head,*node;
+    Node* current = head,*node;
     while(current != nullptr)
         node = current,
         current = current->next,

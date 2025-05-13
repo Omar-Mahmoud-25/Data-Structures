@@ -5,13 +5,13 @@ using namespace std;
 
 template <class T>
 class RedBlackTree{
-    template <class X>
+    
     class Node{
     public:
         T data;
         bool black;
         Node *left, *right, *parent;
-        Node(X data) :
+        Node(T data) :
             data(data),
             black(false),
             left(nullptr),
@@ -19,21 +19,21 @@ class RedBlackTree{
             parent(nullptr) {}
         
     };
-    Node<T> *root;
+    Node *root;
     int numberOfNodes = 0;
 
-    Node<T>* rightRotate(Node<T> *curr);
-    Node<T>* leftRotate(Node<T> *curr);
-    void handleTwoAdjacentRedNodes(Node<T> *curr);
-    void remove(Node<T> *curr, T value);
-    void removeNode(Node<T> *curr);
-    void handleDoubleBlack(Node<T>* curr);
-    int height(Node<T>* node) const;
-    void inOrderTraversal(Node<T>* node) const;
-    void inReversedOrderTraversal(Node<T>* node) const;
-    void preOrderTraversal(Node<T>* node) const;
-    void postOrderTraversal(Node<T>* node) const;
-    void visit(Node<T>* node) const;
+    Node* rightRotate(Node *curr);
+    Node* leftRotate(Node *curr);
+    void handleTwoAdjacentRedNodes(Node *curr);
+    void remove(Node *curr, T value);
+    void removeNode(Node *curr);
+    void handleDoubleBlack(Node* curr);
+    int height(Node* node) const;
+    void inOrderTraversal(Node* node) const;
+    void inReversedOrderTraversal(Node* node) const;
+    void preOrderTraversal(Node* node) const;
+    void postOrderTraversal(Node* node) const;
+    void visit(Node* node) const;
 
 public:
     RedBlackTree():root(nullptr){}

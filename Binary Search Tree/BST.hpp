@@ -7,26 +7,25 @@ template <class T>
 class BST
 {
 private:
-    template <class X>
     class Node{
     public:
-        X data;
+        T data;
         Node *left = nullptr,*right = nullptr,*parent = nullptr;
-        Node(X data):data(data){}
+        Node(T data):data(data){}
     };
-    Node<T>* root = nullptr;
+    Node* root = nullptr;
     int numberOfNodes = 0;
-    Node<T>* getMin(Node<T> *node);
-    Node<T>* getMax(Node<T> *max);
-    Node<T>* getParent(Node<T>* curr);
-    void remove(Node<T>* node);
-    void removeWithTwoChildren(Node <T>* node);
-    int height(Node<T>* node) const;
-    void inOrderTraversal(Node<T>* node) const;
-    void inReversedOrderTraversal(Node<T>* node) const;
-    void preOrderTraversal(Node<T>* node) const;
-    void postOrderTraversal(Node<T>* node) const;
-    void visit(Node<T>* node) const;
+    Node* getMin(Node *node);
+    Node* getMax(Node *max);
+    Node* getParent(Node* curr);
+    void remove(Node* node);
+    void removeWithTwoChildren(Node* node);
+    int height(Node* node) const;
+    void inOrderTraversal(Node* node) const;
+    void inReversedOrderTraversal(Node* node) const;
+    void preOrderTraversal(Node* node) const;
+    void postOrderTraversal(Node* node) const;
+    void visit(Node* node) const;
 public:
     BST();
     ~BST();

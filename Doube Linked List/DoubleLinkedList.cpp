@@ -12,7 +12,7 @@ DoubleLinkedList<T>::~DoubleLinkedList(){
 
 template <class T>
 void DoubleLinkedList<T>::push_back(T data){
-    Node<T>* newNode = new Node<T>(data);
+    Node* newNode = new Node(data);
     ++size;
     if (head == nullptr)
         return void(head = last = newNode);
@@ -26,8 +26,8 @@ template <class T>
 void DoubleLinkedList<T>::push_front(T data){
     ++size;
     if (head == nullptr)
-        return void(head = new Node<T>(data));
-    Node<T>* newNode = new Node<T>(data,head);
+        return void(head = new Node(data));
+    Node* newNode = new Node(data,head);
     head -> previous=newNode;
     head = newNode;
     return;
@@ -42,7 +42,7 @@ void DoubleLinkedList<T>::insert_at(T data,int position){
     if (position == size)
         return push_back(data);
     ++size;
-    Node<T> *newNode = new Node<T>(data),*p = head;
+    Node *newNode = new Node(data),*p = head;
     while(--position)
         p = p->next;
     newNode -> next = p -> next;
@@ -56,7 +56,7 @@ template <class T>
 void DoubleLinkedList<T>::pop_front(){
     if (head == nullptr)
         throw runtime_error("Empty List!!");
-    Node<T>* newNode = head -> next;
+    Node* newNode = head -> next;
     delete head;
     head = newNode;
     --size;
@@ -72,7 +72,7 @@ void DoubleLinkedList<T>::pop_back(){
         head = nullptr;
         return;
     }
-    Node<T>* newNode = last;
+    Node* newNode = last;
     last = last->previous;
     delete newNode;
     return;
@@ -87,7 +87,7 @@ void DoubleLinkedList<T>::remove_at(int position){
     if (position == size-1)
         return pop_back();
     --size;
-    Node<T> *newNode,*p = head;
+    Node *newNode,*p = head;
     while(--position)
         p = p->next;
     newNode = p->next;
@@ -103,7 +103,7 @@ void DoubleLinkedList<T>::reverse(){
         throw runtime_error("Cannot reverse an empty list!");
     if (size == 1)
         return;
-    Node<T> *prv = nullptr,*current = head,*nxt = head;
+    Node *prv = nullptr,*current = head,*nxt = head;
     last = head;
     while(current)
         nxt = nxt->next,
@@ -119,7 +119,7 @@ void DoubleLinkedList<T>::clear(){
     if (head == nullptr)
         return;
     size = 0;
-    Node <T>* it = head,*node;
+    Node* it = head,*node;
     while(it != nullptr)
         node = it,
         it = it->next,

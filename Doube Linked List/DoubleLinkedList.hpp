@@ -8,16 +8,15 @@ using namespace std;
 template <class T>
 class DoubleLinkedList{
 private:
-    template <class X>
     class Node{
     public:
         T data;
         Node* next;
         Node* previous;
-        Node(T data,Node<X>* next = nullptr,Node<X>* previous = nullptr):data(data),next(next),previous(previous){}
+        Node(T data,Node* next = nullptr,Node* previous = nullptr):data(data),next(next),previous(previous){}
     };
-    Node<T>* head = nullptr;
-    Node<T>* last = nullptr;
+    Node* head = nullptr;
+    Node* last = nullptr;
     unsigned int size = 0;
 public:
     DoubleLinkedList(){}
@@ -39,9 +38,9 @@ public:
 
     class Iterator{
     private:
-        Node<T>* current;
+        Node* current;
     public:
-        Iterator(Node<T>* start):current(start){}
+        Iterator(Node* start):current(start){}
         T& operator*() const;
         Iterator& operator++();
         bool operator != (const Iterator& other) const;

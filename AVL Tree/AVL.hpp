@@ -6,14 +6,13 @@ using namespace std;
 template <class T>
 class AVL
 {
-    template <class X>
     class Node
     {
     public:
         T data;
         int height, BF;
         Node *left, *right, *parent;
-        Node(X data) :
+        Node(T data) :
             data(data),
             height(0),
             BF(0),
@@ -21,26 +20,26 @@ class AVL
             right(nullptr),
             parent(nullptr) {}
     };
-    Node<T> *root;
+    Node *root;
     int numberOfNodes = 0;
 
-    Node<T>* getMin(Node<T>* node);
-    Node<T>* getMax(Node<T>* node);
-    Node<T>* rightRotate(Node<T> *curr);
-    Node<T>* leftRotate(Node<T> *curr);
-    Node<T>* insert(Node<T> *curr, T value);
-    // Node<T>* getParent(Node<T> *curr);
-    Node<T>* balance(Node<T> *node);
-    void update(Node<T> *node);
-    void remove(Node<T> *curr, T value);
-    void remove(Node<T> *curr);
-    void removeWithTwoChildren(Node<T> *curr);
-    int height(Node<T>* node) const;
-    void inOrderTraversal(Node<T>* node) const;
-    void inReversedOrderTraversal(Node<T>* node) const;
-    void preOrderTraversal(Node<T>* node) const;
-    void postOrderTraversal(Node<T>* node) const;
-    void visit(Node<T>* node) const;
+    Node* getMin(Node* node);
+    Node* getMax(Node* node);
+    Node* rightRotate(Node *curr);
+    Node* leftRotate(Node *curr);
+    Node* insert(Node *curr, T value);
+    // Node* getParent(Node *curr);
+    Node* balance(Node *node);
+    void update(Node *node);
+    void remove(Node *curr, T value);
+    void remove(Node *curr);
+    void removeWithTwoChildren(Node *curr);
+    int height(Node* node) const;
+    void inOrderTraversal(Node* node) const;
+    void inReversedOrderTraversal(Node* node) const;
+    void preOrderTraversal(Node* node) const;
+    void postOrderTraversal(Node* node) const;
+    void visit(Node* node) const;
 
 public:
     AVL():root(nullptr){}

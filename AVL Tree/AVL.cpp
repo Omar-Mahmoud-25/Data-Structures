@@ -6,16 +6,16 @@ template <class T>
 AVL<T>::~AVL(){this->clear();}
 
 template <typename T>
-typename AVL<T>::template Node<T>* AVL<T>::getMin(Node<T>* node){
-    Node<T>* start = node;
+typename AVL<T>::Node* AVL<T>::getMin(Node* node){
+    Node* start = node;
     while(start->left)
         start = start->left;
     return start;
 }
 
 template <typename T>
-typename AVL<T>::template Node<T>* AVL<T>::getMax(Node<T>* node){
-    Node<T>* start = node;
+typename AVL<T>::Node* AVL<T>::getMax(Node* node){
+    Node* start = node;
     while(start->right)
         start = start->right;
     return start;
@@ -30,10 +30,10 @@ template <class T>
 void AVL<T>::clear(){
     if (root == nullptr)
         return;
-    queue <Node<T>*> qu;
+    queue <Node*> qu;
     qu.emplace(root);
     while(!qu.empty()){
-        Node<T>* node = qu.front();
+        Node* node = qu.front();
         qu.pop();
         if (node->right) 
             qu.emplace(node->right);
@@ -47,7 +47,7 @@ void AVL<T>::clear(){
 }
 
 template <class T>
-int AVL<T>::height(Node<T>* node) const{
+int AVL<T>::height(Node* node) const{
     if (node == nullptr)
         return 0;
     return 1 + max(height(node->right),height(node->left));
@@ -55,7 +55,7 @@ int AVL<T>::height(Node<T>* node) const{
 
 template <class T>
 bool AVL<T>::find(T val) const{
-    Node<T> *node = root;
+    Node *node = root;
     while(node)
         if (node->data == val)
             return true;
@@ -72,13 +72,13 @@ int AVL<T>::height() const {
 }
 
 template <class T>
-void AVL<T>::visit(Node <T>* node) const{
+void AVL<T>::visit(Node* node) const{
     cout << node->data << ' ';
     return;
 }
 
 template <class T>
-void AVL<T>::inOrderTraversal(Node <T>* node) const{
+void AVL<T>::inOrderTraversal(Node* node) const{
     if (node == nullptr)
         return;
     inOrderTraversal(node->left);
@@ -87,7 +87,7 @@ void AVL<T>::inOrderTraversal(Node <T>* node) const{
 }
 
 template <class T>
-void AVL<T>::inReversedOrderTraversal(Node <T>* node) const{
+void AVL<T>::inReversedOrderTraversal(Node* node) const{
     if (node == nullptr)
         return;
     inReversedOrderTraversal(node->right);
@@ -96,7 +96,7 @@ void AVL<T>::inReversedOrderTraversal(Node <T>* node) const{
 }
 
 template <class T>
-void AVL<T>::preOrderTraversal(Node <T>* node) const{
+void AVL<T>::preOrderTraversal(Node* node) const{
     if (node == nullptr)
         return;
     visit(node);
@@ -105,7 +105,7 @@ void AVL<T>::preOrderTraversal(Node <T>* node) const{
 }
 
 template <class T>
-void AVL<T>::postOrderTraversal(Node <T>* node) const{
+void AVL<T>::postOrderTraversal(Node* node) const{
     if (node == nullptr)
         return;
     postOrderTraversal(node->left);
@@ -137,10 +137,10 @@ template <class T>
 void AVL<T>::breadthFirstTraversal() const{
     if (root == nullptr)
         return;
-    queue<Node<T>*>q;
+    queue<Node*>q;
     q.emplace(root);
     while(!q.empty()){
-        Node<T>* node = q.front();
+        Node* node = q.front();
         q.pop();
         visit(node);
         if (node->left)
@@ -155,16 +155,16 @@ void AVL<T>::insert(T value)
 {
     ++numberOfNodes;
     if (root == nullptr)
-        root = new Node<T>(value);
+        root = new Node(value);
     else
         insert(root, value);
 }
 
 template <class T>
-typename AVL<T>::template Node<T>* AVL<T>::insert(Node<T> *curr, T value)
+typename AVL<T>::Node* AVL<T>::insert(Node *curr, T value)
 {
     if (curr == nullptr)
-        return new Node<T>(value);
+        return new Node(value);
     if (value < curr->data){
         curr->left = insert(curr->left, value);
         curr->left->parent = curr;
@@ -178,7 +178,7 @@ typename AVL<T>::template Node<T>* AVL<T>::insert(Node<T> *curr, T value)
 }
 
 template <class T>
-void AVL<T>::update(Node<T> *node)
+void AVL<T>::update(Node *node)
 {
     int leftHeight = -1, rightHeight = -1;
     if (node->left)
@@ -190,10 +190,10 @@ void AVL<T>::update(Node<T> *node)
 }
 
 template <class T>
-typename AVL<T>::template Node<T>* AVL<T>::leftRotate(Node<T> *curr)
+typename AVL<T>::Node* AVL<T>::leftRotate(Node *curr)
 {
-    Node<T> *newRoot = curr->right, *parent = curr->parent;
-    Node<T> *T2 = newRoot->left;
+    Node *newRoot = curr->right, *parent = curr->parent;
+    Node *T2 = newRoot->left;
     if (parent == nullptr)
         root = newRoot,
         newRoot->parent = nullptr;
@@ -214,10 +214,10 @@ typename AVL<T>::template Node<T>* AVL<T>::leftRotate(Node<T> *curr)
 }
 
 template <class T>
-typename AVL<T>::template Node<T>* AVL<T>::rightRotate(Node<T> *curr)
+typename AVL<T>::Node* AVL<T>::rightRotate(Node *curr)
 {
-    Node<T> *newRoot = curr->left;
-    Node<T> *T2 = newRoot->right, *parent = curr->parent;
+    Node *newRoot = curr->left;
+    Node *T2 = newRoot->right, *parent = curr->parent;
     if (parent == nullptr)
         root = newRoot,
         newRoot->parent = nullptr;
@@ -238,7 +238,7 @@ typename AVL<T>::template Node<T>* AVL<T>::rightRotate(Node<T> *curr)
 }
 
 template <class T>
-typename AVL<T>::template Node<T> *AVL<T>::balance(Node<T> *curr)
+typename AVL<T>::Node* AVL<T>::balance(Node *curr)
 {
     if (curr->BF < -1)
     {
@@ -264,9 +264,9 @@ void AVL<T>::remove(T value)
 }
 
 template <class T>
-void AVL<T>::removeWithTwoChildren(Node<T> *node)
+void AVL<T>::removeWithTwoChildren(Node *node)
 {
-    Node<T> *min = node->right;
+    Node *min = node->right;
     while (min->left)
         min = min->left;
     node->data = min->data;
@@ -274,9 +274,9 @@ void AVL<T>::removeWithTwoChildren(Node<T> *node)
 }
 
 template <class T>
-void AVL<T>::remove(Node<T> *node)
+void AVL<T>::remove(Node *node)
 {
-    Node<T> *parent = node->parent;
+    Node *parent = node->parent;
     --numberOfNodes;
     if (parent && parent->right == node)
     {
@@ -301,7 +301,7 @@ void AVL<T>::remove(Node<T> *node)
 }
 
 template <class T>
-void AVL<T>::remove(Node<T> *curr, T value)
+void AVL<T>::remove(Node *curr, T value)
 {
     if (curr == nullptr)
         return;

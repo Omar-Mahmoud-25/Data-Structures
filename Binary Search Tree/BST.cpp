@@ -10,10 +10,10 @@ BST<T>::~BST(){this->clear();}
 template <class T>
 void BST<T>::insert(T val){
     ++numberOfNodes;
-    Node<T> *newNode = new Node<T>(val);
+    Node *newNode = new Node(val);
     if (root == nullptr)
         return void(root = newNode);
-    Node<T> *node = root,*prv = nullptr;
+    Node *node = root,*prv = nullptr;
     while(node){
         prv = node;
         if (node->data == val)
@@ -32,7 +32,7 @@ void BST<T>::insert(T val){
 
 template <class T>
 bool BST<T>::find(T val) const{
-    Node<T> *node = root;
+    Node *node = root;
     while(node)
         if (node->data == val)
             return true;
@@ -47,7 +47,7 @@ template <class T>
 void BST<T>::remove(T val){
     if (root == nullptr)
         return ;
-    Node<T> *node = root,*prv = nullptr;
+    Node *node = root,*prv = nullptr;
     --numberOfNodes;
     while(node)
         if (node->data == val)
@@ -63,7 +63,7 @@ void BST<T>::remove(T val){
 }
 
 template <class T>
-void BST<T>::remove(Node<T>* node){
+void BST<T>::remove(Node* node){
     if (node->parent->right == node)
         if (node->right)
             node->parent->right = node->right;
@@ -83,34 +83,34 @@ void BST<T>::remove(Node<T>* node){
 }
 
 template <class T>
-void BST<T>::removeWithTwoChildren(Node<T>* node){
-    Node<T>* min = getMin(node->right);
+void BST<T>::removeWithTwoChildren(Node* node){
+    Node* min = getMin(node->right);
     node->data = min->data;
     return remove(min);
 }
 
 template <typename T>
-typename BST<T>::template Node<T>* BST<T>::getMin(Node<T>* node){
-    Node<T>* start = node;
+typename BST<T>::Node* BST<T>::getMin(Node* node){
+    Node* start = node;
     while(start->left)
         start = start->left;
     return start;
 }
 
 template <typename T>
-typename BST<T>::template Node<T>* BST<T>::getMax(Node<T>* node){
-    Node<T>* start = node;
+typename BST<T>::Node* BST<T>::getMax(Node* node){
+    Node* start = node;
     while(start->right)
         start = start->right;
     return start;
 }
 
 template <class T>
-typename BST<T>::template Node<T> *BST<T>::getParent(Node<T> *curr)
+typename BST<T>::Node *BST<T>::getParent(Node *curr)
 {
     if (curr == root || root == nullptr)
         return nullptr;
-    Node<T> *node = root;
+    Node *node = root;
     while (node)
         if (node->left == curr || node->right == curr)
             return node;
@@ -130,10 +130,10 @@ template <class T>
 void BST<T>::clear(){
     if (root == nullptr)
         return;
-    queue <Node<T>*> q;
+    queue <Node*> q;
     q.emplace(root);
     while(!q.empty()){
-        Node<T>* node = q.front();
+        Node* node = q.front();
         q.pop();
         if (node->right) 
             q.emplace(node->right);
@@ -147,7 +147,7 @@ void BST<T>::clear(){
 }
 
 template <class T>
-int BST<T>::height(Node<T>* node) const{
+int BST<T>::height(Node* node) const{
     if (node == nullptr)
         return 0;
     return 1 + max(height(node->right),height(node->left));
@@ -159,13 +159,13 @@ int BST<T>::height() const {
 }
 
 template <class T>
-void BST<T>::visit(Node<T>* node) const{
+void BST<T>::visit(Node* node) const{
     cout << node->data << ' ';
     return;
 }
 
 template <class T>
-void BST<T>::inOrderTraversal(Node <T>* node) const{
+void BST<T>::inOrderTraversal(Node* node) const{
     if (node == nullptr)
         return;
     inOrderTraversal(node->left);
@@ -174,7 +174,7 @@ void BST<T>::inOrderTraversal(Node <T>* node) const{
 }
 
 template <class T>
-void BST<T>::inReversedOrderTraversal(Node <T>* node) const{
+void BST<T>::inReversedOrderTraversal(Node* node) const{
     if (node == nullptr)
         return;
     inOrderTraversal(node->right);
@@ -183,7 +183,7 @@ void BST<T>::inReversedOrderTraversal(Node <T>* node) const{
 }
 
 template <class T>
-void BST<T>::preOrderTraversal(Node <T>* node) const{
+void BST<T>::preOrderTraversal(Node* node) const{
     if (node == nullptr)
         return;
     visit(node);
@@ -192,7 +192,7 @@ void BST<T>::preOrderTraversal(Node <T>* node) const{
 }
 
 template <class T>
-void BST<T>::postOrderTraversal(Node <T>* node) const{
+void BST<T>::postOrderTraversal(Node* node) const{
     if (node == nullptr)
         return;
     postOrderTraversal(node->left);
@@ -224,10 +224,10 @@ template <class T>
 void BST<T>::breadthFirstTraversal() const{
     if (root == nullptr)
         return;
-    queue<Node<T>*>q;
+    queue<Node*>q;
     q.emplace(root);
     while(!q.empty()){
-        Node<T>* node = q.front();
+        Node* node = q.front();
         q.pop();
         cout << node->data << ' ';
         if (node->left)

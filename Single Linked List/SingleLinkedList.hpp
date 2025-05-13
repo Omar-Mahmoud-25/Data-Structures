@@ -8,15 +8,15 @@ using namespace std;
 template <class T>
 class SingleLinkedList{
 private:
-    template <class X>
+
     class Node{
     public:
         T data;
         Node* next;
-        Node(T data,Node<X>* next = nullptr):data(data),next(next){}
+        Node(T data,Node* next = nullptr):data(data),next(next){}
     };
-    Node<T>* head = nullptr;
-    Node<T>* last = nullptr;
+    Node* head = nullptr;
+    Node* last = nullptr;
     unsigned int length = 0;
 public:
     SingleLinkedList(){}
@@ -38,9 +38,9 @@ public:
 
     class Iterator{
     private:
-        Node<T>* current;
+        Node* current;
     public:
-        Iterator(Node<T>* start):current(start){}
+        Iterator(Node* start):current(start){}
         T& operator*() const;
         Iterator& operator++();
         bool operator != (const Iterator& other) const;
