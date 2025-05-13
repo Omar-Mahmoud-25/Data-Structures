@@ -13,7 +13,7 @@ public:
 
     Node* root;
     Trie();
-    void insert(string word);
-    bool search(string word);
-    bool startsWith(string prefix);
+    void insert(string& word);
+    bool search(string& word);
+    bool startsWith(string& prefix);
 };

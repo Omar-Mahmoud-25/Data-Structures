@@ -1,7 +1,7 @@
 #ifndef QUEUE_HPP
 #define QUEUE_HPP
 #include <iostream>
-#include "..\Single Linked List\SingleLinkedList.cpp"
+#include "../Single Linked List/SingleLinkedList.cpp"
 using namespace std;
 
 template <class T>

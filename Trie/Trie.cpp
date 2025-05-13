@@ -7,7 +7,7 @@ Trie::Trie() {
     root = new Node();
 }
 
-void Trie::insert(string word) {
+void Trie::insert(string& word) {
     Node* node = root;
     for (char c : word) {
         if (node->children[c] == nullptr)
@@ -17,7 +17,7 @@ void Trie::insert(string word) {
     node->word = true;
 }
 
-bool Trie::search(string word) {
+bool Trie::search(string& word) {
     Node* node = root;
     for (char c : word) {
         if (node->children[c] == nullptr)
@@ -27,7 +27,7 @@ bool Trie::search(string word) {
     return node->word;
 }
 
-bool Trie::startsWith(string prefix) {
+bool Trie::startsWith(string& prefix) {
     Node* node = root;
     for (char c : prefix) {
         if (node->children[c] == nullptr)
